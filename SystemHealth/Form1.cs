@@ -327,7 +327,7 @@ namespace SystemHealth
 
             errorFilesButton.BeginInvoke(new MethodInvoker(() =>
             {
-                if (files.Count() > 0)
+                if (files.Count() == 0)
                 {
                     errorFilesButton.Text = "OK";
                     errorFilesButton.BackColor = Color.Green;
