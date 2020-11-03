@@ -47,6 +47,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.updateProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -243,11 +244,19 @@
             this.label10.TabIndex = 20;
             this.label10.Text = "DHL/DPD";
             // 
+            // updateProgressBar
+            // 
+            this.updateProgressBar.Location = new System.Drawing.Point(175, 358);
+            this.updateProgressBar.Name = "updateProgressBar";
+            this.updateProgressBar.Size = new System.Drawing.Size(145, 23);
+            this.updateProgressBar.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 414);
+            this.Controls.Add(this.updateProgressBar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
@@ -296,6 +305,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ProgressBar updateProgressBar;
     }
 }
 

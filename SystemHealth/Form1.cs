@@ -49,13 +49,31 @@ namespace SystemHealth
          * 
          */
         private void StartAllChecks()
-        {
-            CheckEbayOrders();
-            CheckAmazonOrders();
-            CheckAmazonProcesses();
-            CheckEbayProcesses();
-            CheckDHLProcess();
-            CheckDHLDPDApi();
+        { 
+            updateProgressBar.BeginInvoke(new MethodInvoker(() =>
+            {
+                updateProgressBar.Value = 0;
+
+                CheckEbayOrders();
+                updateProgressBar.PerformStep();
+
+                CheckAmazonOrders();
+                updateProgressBar.PerformStep();
+
+                CheckAmazonProcesses();
+                updateProgressBar.PerformStep();
+
+                CheckEbayProcesses();
+                updateProgressBar.PerformStep();
+
+                CheckDHLProcess();
+                updateProgressBar.PerformStep();
+
+                CheckDHLDPDApi();
+                updateProgressBar.PerformStep();
+
+                updateProgressBar.Value = 100;
+            }));
 
             //Write the current date to a label on the gui
             lastUpdatedLabel.BeginInvoke(new MethodInvoker(() =>
