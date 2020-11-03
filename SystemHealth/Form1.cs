@@ -26,20 +26,24 @@ namespace SystemHealth
          */
         private void Form1_Load(object sender, EventArgs e)
         {
-            StartAllChecksTimed();
+            //Starts all checks
+            StartAllChecks();
+
+            //Starts all checks again after 10 Minutes
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 600000; //Time in milliseconds - 60 seconds * 10 minutes * 1000 milliseconds
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
         }
 
         /*
          * 
          */
-        private void StartAllChecksTimed()
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var timer = new System.Threading.Timer(
-                e => StartAllChecks(),
-                null,
-                TimeSpan.Zero,
-                TimeSpan.FromMinutes(10));
+            StartAllChecks();
         }
+
 
         /*
          * 
