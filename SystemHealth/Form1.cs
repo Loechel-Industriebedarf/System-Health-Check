@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Net;
@@ -70,6 +71,9 @@ namespace SystemHealth
                 updateProgressBar.PerformStep();
 
                 CheckDHLDPDApi();
+                updateProgressBar.PerformStep();
+
+                CheckForErrorFiles();
                 updateProgressBar.PerformStep();
 
                 updateProgressBar.Value = 100;
@@ -277,7 +281,7 @@ namespace SystemHealth
 
                 dhlProcessButton.BeginInvoke(new MethodInvoker(() =>
                 {
-                    if (!htmlCode.Contains("DHL: Disruption of Service"))
+                    if (!htmlCode.Contains("DHL: Disruption of Service TODO"))
                     {
                         dhlApiButton.Text = "OK";
                         dhlApiButton.BackColor = Color.Green;
@@ -292,7 +296,7 @@ namespace SystemHealth
 
                 dpdApiButton.BeginInvoke(new MethodInvoker(() =>
                 {
-                    if (!htmlCode.Contains("DPD: Disruption of Service"))
+                    if (!htmlCode.Contains("DPD: Disruption of Service TODO"))
                     {
                         dpdApiButton.Text = "OK";
                         dpdApiButton.BackColor = Color.Green;
@@ -310,6 +314,31 @@ namespace SystemHealth
             {
 
             }
+        }
+
+        /*
+        * 
+        */
+        private void CheckForErrorFiles()
+        {
+            String sDir = "S:\\";
+            string[] files = Directory.GetFiles(sDir, "*ERROR*.csv", SearchOption.AllDirectories);
+            //MessageBox.Show(files.Count().ToString());
+
+            errorFilesButton.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (files.Count() > 0)
+                {
+                    errorFilesButton.Text = "OK";
+                    errorFilesButton.BackColor = Color.Green;
+                }
+                else
+                {
+                    errorFilesButton.Text = "X";
+                    errorFilesButton.BackColor = Color.Red;
+                    MessageBox.Show("Es gibt ERROR Files bei den Bestellabholungen.");
+                }
+            }));
         }
 
         /*

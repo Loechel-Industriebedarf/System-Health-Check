@@ -48,6 +48,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.updateProgressBar = new System.Windows.Forms.ProgressBar();
+            this.errorFilesButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -97,7 +99,7 @@
             // 
             this.amazonOrdersButton.Enabled = false;
             this.amazonOrdersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amazonOrdersButton.Location = new System.Drawing.Point(93, 36);
+            this.amazonOrdersButton.Location = new System.Drawing.Point(174, 36);
             this.amazonOrdersButton.Name = "amazonOrdersButton";
             this.amazonOrdersButton.Size = new System.Drawing.Size(75, 75);
             this.amazonOrdersButton.TabIndex = 4;
@@ -181,7 +183,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 200);
+            this.label6.Location = new System.Drawing.Point(14, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 13;
@@ -199,7 +201,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(95, 96);
+            this.label8.Location = new System.Drawing.Point(176, 96);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 13);
             this.label8.TabIndex = 15;
@@ -219,7 +221,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(95, 200);
+            this.label9.Location = new System.Drawing.Point(95, 201);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 18;
@@ -251,11 +253,33 @@
             this.updateProgressBar.Size = new System.Drawing.Size(145, 23);
             this.updateProgressBar.TabIndex = 21;
             // 
+            // errorFilesButton
+            // 
+            this.errorFilesButton.Enabled = false;
+            this.errorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorFilesButton.Location = new System.Drawing.Point(93, 36);
+            this.errorFilesButton.Name = "errorFilesButton";
+            this.errorFilesButton.Size = new System.Drawing.Size(75, 75);
+            this.errorFilesButton.TabIndex = 22;
+            this.errorFilesButton.Text = " ";
+            this.errorFilesButton.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(95, 95);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "ERROR Files";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 414);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.errorFilesButton);
             this.Controls.Add(this.updateProgressBar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
@@ -306,6 +330,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ProgressBar updateProgressBar;
+        private System.Windows.Forms.Button errorFilesButton;
+        private System.Windows.Forms.Label label11;
     }
 }
 
