@@ -50,40 +50,50 @@ namespace SystemHealth
          * 
          */
         private void StartAllChecks()
-        { 
-            updateProgressBar.BeginInvoke(new MethodInvoker(() =>
+        {
+            try
             {
-                updateProgressBar.Value = 0;
+                updateProgressBar.BeginInvoke(new MethodInvoker(() =>
+                {
+                    updateProgressBar.Value = 0;
 
-                CheckEbayOrders();
-                updateProgressBar.PerformStep();
+                    CheckEbayOrders();
+                    updateProgressBar.PerformStep();
 
-                CheckAmazonOrders();
-                updateProgressBar.PerformStep();
+                    CheckAmazonOrders();
+                    updateProgressBar.PerformStep();
 
-                CheckAmazonProcesses();
-                updateProgressBar.PerformStep();
+                    CheckAmazonProcesses();
+                    updateProgressBar.PerformStep();
 
-                CheckEbayProcesses();
-                updateProgressBar.PerformStep();
+                    CheckEbayProcesses();
+                    updateProgressBar.PerformStep();
 
-                CheckDHLProcess();
-                updateProgressBar.PerformStep();
+                    CheckDHLProcess();
+                    updateProgressBar.PerformStep();
 
-                CheckDHLDPDApi();
-                updateProgressBar.PerformStep();
+                    CheckDHLDPDApi();
+                    updateProgressBar.PerformStep();
 
-                CheckForErrorFiles();
-                updateProgressBar.PerformStep();
+                    CheckForErrorFiles();
+                    updateProgressBar.PerformStep();
 
-                updateProgressBar.Value = 100;
-            }));
+                    CheckLastOrderExecute();
+                    updateProgressBar.PerformStep();
 
-            //Write the current date to a label on the gui
-            lastUpdatedLabel.BeginInvoke(new MethodInvoker(() =>
+                    updateProgressBar.Value = 100;
+                }));
+
+                //Write the current date to a label on the gui
+                lastUpdatedLabel.BeginInvoke(new MethodInvoker(() =>
+                {
+                    lastUpdatedLabel.Text = "Letztes Update: " + DateTime.Now.ToString("HH:mm:ss");
+                }));
+            }
+            catch(Exception ex)
             {
-                lastUpdatedLabel.Text = "Letztes Update: " + DateTime.Now.ToString("HH:mm:ss");
-            }));
+
+            }
         }
 
         /*
@@ -338,6 +348,32 @@ namespace SystemHealth
                     errorFilesButton.BackColor = Color.Red;
                     MessageBox.Show("Es gibt ERROR Files bei den Bestellabholungen.");
                 }
+            }));
+        }
+
+        /*
+        * 
+        */
+        private void CheckLastOrderExecute()
+        {
+            string lastExecution = System.IO.File.ReadAllText(@"S:\last.txt").Replace("\r","").Replace("\n","");
+            DateTime lastExecutionDateTime = DateTime.ParseExact(lastExecution, "dd.MM.yyyy HH:mm:ss,ff", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime currentDateTime = DateTime.Now;
+
+            lastRunButton.BeginInvoke(new MethodInvoker(() =>
+            {
+                lastRunButton.Text = lastExecutionDateTime.ToString("HH:mm:ss");
+                if ((currentDateTime - lastExecutionDateTime).TotalMinutes < 30)
+                {
+                    lastRunButton.BackColor = Color.Green;
+                }
+                else
+                {
+                    lastRunButton.BackColor = Color.Red;
+                    MessageBox.Show("Die Ebay/Real/Conrad etc. Bestellungen werden nicht mehr importiert!");
+                }
+
+                
             }));
         }
 
