@@ -102,7 +102,7 @@ namespace SystemHealth
         private void CheckEbayOrders()
         {
             OdbcDataReader dr = 
-                ExecuteReadSql("SELECT COUNT(*) AS Counter FROM dbo.AUFTRAGSKOPF WHERE (BELEGART = '8' OR BELEGART = '11' OR BELEGART = '12' OR BELEGART = '13' OR BELEGART = '14' OR BELEGART = '18') AND ERFASSUNGSDATUM > DATEADD(HOUR, -1, GETDATE())");
+                ExecuteReadSql("SELECT COUNT(*) AS Counter FROM dbo.AUFTRAGSKOPF WHERE (BELEGART = '8' OR BELEGART = '11' OR BELEGART = '12' OR BELEGART = '14' OR BELEGART = '18') AND ERFASSUNGSDATUM > DATEADD(HOUR, -1, GETDATE())");
 
             while (dr.Read())
             {
@@ -202,7 +202,7 @@ namespace SystemHealth
             using (PowerShell ps = PowerShell.Create())
             {
                 // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'powershell'}).count }");
+                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'timeout'}).count }");
 
                 // execute the script and await the result.
                 var pipelineObjects = ps.Invoke();
@@ -215,11 +215,21 @@ namespace SystemHealth
                     processCount = Convert.ToInt32(item.BaseObject.ToString());
                 }
 
+                // specify the script code to run.
+                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'cmd'}).count }");
+
+                // execute the script and await the result.
+                pipelineObjects = ps.Invoke();
+
+                // print the resulting pipeline objects to the console.
+                foreach (var item in pipelineObjects)
+                {
+                    processCount += Convert.ToInt32(item.BaseObject.ToString());
+                }
+
                 ebayProcessButton.BeginInvoke(new MethodInvoker(() =>
                 {
-                    
-
-                    if (Convert.ToInt32(processCount) == 1)
+                    if (Convert.ToInt32(processCount) >= 1)
                     {
                         ebayProcessButton.Text = "OK";
                         ebayProcessButton.BackColor = Color.Green;
@@ -265,8 +275,7 @@ namespace SystemHealth
                     else
                     {
                         dhlProcessButton.Text = "X";
-                        dhlProcessButton.BackColor = Color.Red;
-                        MessageBox.Show("Es läuft ein unnötiger DHL Prozess auf dem Server.");
+                        dhlProcessButton.BackColor = Color.Yellow;
                     }
                 }));
             }
@@ -291,7 +300,7 @@ namespace SystemHealth
 
                 dhlProcessButton.BeginInvoke(new MethodInvoker(() =>
                 {
-                    if (!htmlCode.Contains("DHL: Disruption of Service TODO"))
+                    if (!htmlCode.Contains("Subscribe to updates for <strong>DHL: Disruption of Service</strong>"))
                     {
                         dhlApiButton.Text = "OK";
                         dhlApiButton.BackColor = Color.Green;
@@ -306,7 +315,8 @@ namespace SystemHealth
 
                 dpdApiButton.BeginInvoke(new MethodInvoker(() =>
                 {
-                    if (!htmlCode.Contains("DPD: Disruption of Service TODO"))
+                    if (!htmlCode.Contains("Subscribe to updates for <strong>DPD: Disruption of Service</strong>" +
+                    "< a data - toggle = \"modal\" class=\"subscribe\""))
                     {
                         dpdApiButton.Text = "OK";
                         dpdApiButton.BackColor = Color.Green;
@@ -333,7 +343,6 @@ namespace SystemHealth
         {
             String sDir = "S:\\";
             string[] files = Directory.GetFiles(sDir, "*ERROR*.csv", SearchOption.AllDirectories);
-            //MessageBox.Show(files.Count().ToString());
 
             errorFilesButton.BeginInvoke(new MethodInvoker(() =>
             {
@@ -357,7 +366,16 @@ namespace SystemHealth
         private void CheckLastOrderExecute()
         {
             string lastExecution = System.IO.File.ReadAllText(@"S:\last.txt").Replace("\r","").Replace("\n","");
-            DateTime lastExecutionDateTime = DateTime.ParseExact(lastExecution, "dd.MM.yyyy HH:mm:ss,ff", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime lastExecutionDateTime;
+            try
+            {
+                lastExecutionDateTime = DateTime.ParseExact(lastExecution, "dd.MM.yyyy HH:mm:ss,ff", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch(Exception ex)
+            {
+                lastExecutionDateTime = DateTime.ParseExact(lastExecution, "dd.MM.yyyy  H:mm:ss,ff", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            
             DateTime currentDateTime = DateTime.Now;
 
             lastRunButton.BeginInvoke(new MethodInvoker(() =>
@@ -371,9 +389,7 @@ namespace SystemHealth
                 {
                     lastRunButton.BackColor = Color.Red;
                     MessageBox.Show("Die Ebay/Real/Conrad etc. Bestellungen werden nicht mehr importiert!");
-                }
-
-                
+                }    
             }));
         }
 

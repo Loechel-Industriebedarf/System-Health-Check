@@ -53,6 +53,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.lastRunButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -90,9 +94,9 @@
             // 
             // updateStatsManuallyButton
             // 
-            this.updateStatsManuallyButton.Location = new System.Drawing.Point(178, 491);
+            this.updateStatsManuallyButton.Location = new System.Drawing.Point(201, 483);
             this.updateStatsManuallyButton.Name = "updateStatsManuallyButton";
-            this.updateStatsManuallyButton.Size = new System.Drawing.Size(145, 23);
+            this.updateStatsManuallyButton.Size = new System.Drawing.Size(145, 25);
             this.updateStatsManuallyButton.TabIndex = 3;
             this.updateStatsManuallyButton.Text = "UPDATE!";
             this.updateStatsManuallyButton.UseVisualStyleBackColor = true;
@@ -251,9 +255,9 @@
             // 
             // updateProgressBar
             // 
-            this.updateProgressBar.Location = new System.Drawing.Point(178, 462);
+            this.updateProgressBar.Location = new System.Drawing.Point(201, 452);
             this.updateProgressBar.Name = "updateProgressBar";
-            this.updateProgressBar.Size = new System.Drawing.Size(145, 23);
+            this.updateProgressBar.Size = new System.Drawing.Size(145, 25);
             this.updateProgressBar.TabIndex = 21;
             // 
             // errorFilesButton
@@ -306,11 +310,51 @@
             this.label13.TabIndex = 26;
             this.label13.Text = "Abholung";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(151, 142);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(19, 13);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "1h";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(151, 247);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(19, 13);
+            this.label15.TabIndex = 28;
+            this.label15.Text = "1h";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(135, 37);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(36, 13);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "30Min";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 483);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(186, 13);
+            this.label17.TabIndex = 30;
+            this.label17.Text = "Updated alle 10 Minuten automatisch.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 524);
+            this.ClientSize = new System.Drawing.Size(355, 524);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lastRunButton);
             this.Controls.Add(this.label12);
@@ -371,6 +415,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button lastRunButton;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }
 
