@@ -57,6 +57,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.mercateoErrorFilesButton = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.picardErrorFilesButton = new System.Windows.Forms.Button();
+            this.nwInvoiceButton = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +92,7 @@
             // lastUpdatedLabel
             // 
             this.lastUpdatedLabel.AutoSize = true;
-            this.lastUpdatedLabel.Location = new System.Drawing.Point(9, 496);
+            this.lastUpdatedLabel.Location = new System.Drawing.Point(9, 606);
             this.lastUpdatedLabel.Name = "lastUpdatedLabel";
             this.lastUpdatedLabel.Size = new System.Drawing.Size(85, 13);
             this.lastUpdatedLabel.TabIndex = 2;
@@ -94,7 +101,7 @@
             // 
             // updateStatsManuallyButton
             // 
-            this.updateStatsManuallyButton.Location = new System.Drawing.Point(201, 483);
+            this.updateStatsManuallyButton.Location = new System.Drawing.Point(201, 593);
             this.updateStatsManuallyButton.Name = "updateStatsManuallyButton";
             this.updateStatsManuallyButton.Size = new System.Drawing.Size(145, 25);
             this.updateStatsManuallyButton.TabIndex = 3;
@@ -149,7 +156,7 @@
             // 
             this.dhlProcessButton.Enabled = false;
             this.dhlProcessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dhlProcessButton.Location = new System.Drawing.Point(16, 351);
+            this.dhlProcessButton.Location = new System.Drawing.Point(16, 461);
             this.dhlProcessButton.Name = "dhlProcessButton";
             this.dhlProcessButton.Size = new System.Drawing.Size(75, 75);
             this.dhlProcessButton.TabIndex = 8;
@@ -160,7 +167,7 @@
             // 
             this.dhlApiButton.Enabled = false;
             this.dhlApiButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dhlApiButton.Location = new System.Drawing.Point(97, 351);
+            this.dhlApiButton.Location = new System.Drawing.Point(97, 461);
             this.dhlApiButton.Name = "dhlApiButton";
             this.dhlApiButton.Size = new System.Drawing.Size(75, 75);
             this.dhlApiButton.TabIndex = 10;
@@ -170,7 +177,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(98, 412);
+            this.label4.Location = new System.Drawing.Point(98, 522);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 11;
@@ -180,7 +187,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 412);
+            this.label5.Location = new System.Drawing.Point(17, 522);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 12;
@@ -218,7 +225,7 @@
             // 
             this.dpdApiButton.Enabled = false;
             this.dpdApiButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dpdApiButton.Location = new System.Drawing.Point(178, 351);
+            this.dpdApiButton.Location = new System.Drawing.Point(178, 461);
             this.dpdApiButton.Name = "dpdApiButton";
             this.dpdApiButton.Size = new System.Drawing.Size(75, 75);
             this.dpdApiButton.TabIndex = 17;
@@ -237,7 +244,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(179, 412);
+            this.label3.Location = new System.Drawing.Point(179, 522);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 19;
@@ -247,7 +254,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(15, 324);
+            this.label10.Location = new System.Drawing.Point(15, 434);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 24);
             this.label10.TabIndex = 20;
@@ -255,7 +262,7 @@
             // 
             // updateProgressBar
             // 
-            this.updateProgressBar.Location = new System.Drawing.Point(201, 452);
+            this.updateProgressBar.Location = new System.Drawing.Point(201, 562);
             this.updateProgressBar.Name = "updateProgressBar";
             this.updateProgressBar.Size = new System.Drawing.Size(145, 25);
             this.updateProgressBar.TabIndex = 21;
@@ -340,17 +347,94 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 483);
+            this.label17.Location = new System.Drawing.Point(9, 593);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(186, 13);
             this.label17.TabIndex = 30;
             this.label17.Text = "Updated alle 10 Minuten automatisch.";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(15, 324);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(273, 24);
+            this.label18.TabIndex = 31;
+            this.label18.Text = "Picard/Mercateo/Nordwest/FTP";
+            // 
+            // mercateoErrorFilesButton
+            // 
+            this.mercateoErrorFilesButton.Enabled = false;
+            this.mercateoErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mercateoErrorFilesButton.Location = new System.Drawing.Point(16, 351);
+            this.mercateoErrorFilesButton.Name = "mercateoErrorFilesButton";
+            this.mercateoErrorFilesButton.Size = new System.Drawing.Size(75, 75);
+            this.mercateoErrorFilesButton.TabIndex = 32;
+            this.mercateoErrorFilesButton.Text = " ";
+            this.mercateoErrorFilesButton.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(17, 412);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(52, 13);
+            this.label19.TabIndex = 33;
+            this.label19.Text = "Mercateo";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(97, 412);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(37, 13);
+            this.label20.TabIndex = 35;
+            this.label20.Text = "Picard";
+            // 
+            // picardErrorFilesButton
+            // 
+            this.picardErrorFilesButton.Enabled = false;
+            this.picardErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.picardErrorFilesButton.Location = new System.Drawing.Point(96, 351);
+            this.picardErrorFilesButton.Name = "picardErrorFilesButton";
+            this.picardErrorFilesButton.Size = new System.Drawing.Size(75, 75);
+            this.picardErrorFilesButton.TabIndex = 34;
+            this.picardErrorFilesButton.Text = " ";
+            this.picardErrorFilesButton.UseVisualStyleBackColor = true;
+            // 
+            // nwInvoiceButton
+            // 
+            this.nwInvoiceButton.Enabled = false;
+            this.nwInvoiceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nwInvoiceButton.Location = new System.Drawing.Point(177, 351);
+            this.nwInvoiceButton.Name = "nwInvoiceButton";
+            this.nwInvoiceButton.Size = new System.Drawing.Size(75, 75);
+            this.nwInvoiceButton.TabIndex = 36;
+            this.nwInvoiceButton.Text = " ";
+            this.nwInvoiceButton.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(178, 412);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(64, 13);
+            this.label21.TabIndex = 37;
+            this.label21.Text = "NW-Invoice";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 524);
+            this.ClientSize = new System.Drawing.Size(355, 622);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.nwInvoiceButton);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.picardErrorFilesButton);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.mercateoErrorFilesButton);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -419,6 +503,13 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button mercateoErrorFilesButton;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button picardErrorFilesButton;
+        private System.Windows.Forms.Button nwInvoiceButton;
+        private System.Windows.Forms.Label label21;
     }
 }
 

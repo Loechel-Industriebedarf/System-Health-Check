@@ -81,6 +81,15 @@ namespace SystemHealth
                     CheckLastOrderExecute();
                     updateProgressBar.PerformStep();
 
+                    CheckForPicardErrorFiles();
+                    updateProgressBar.PerformStep();
+
+                    CheckForMercateoErrorFiles();
+                    updateProgressBar.PerformStep();
+
+                    CheckNWProcess();
+                    updateProgressBar.PerformStep();
+
                     updateProgressBar.Value = 100;
                 }));
 
@@ -119,7 +128,7 @@ namespace SystemHealth
                     else
                     {
                         ebayOrdersButton.BackColor = Color.Red;
-                        MessageBox.Show("Die Ebay Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
+                        //MessageBox.Show("Die Ebay Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
                     }
                     
                 }));   
@@ -149,7 +158,7 @@ namespace SystemHealth
                     else
                     {
                         amazonOrdersButton.BackColor = Color.Red;
-                        MessageBox.Show("Die Amazon Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
+                        //MessageBox.Show("Die Amazon Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
                     }
 
                 }));
@@ -284,6 +293,44 @@ namespace SystemHealth
         /*
         * 
         */
+        private void CheckNWProcess()
+        {
+            using (PowerShell ps = PowerShell.Create())
+            {
+                // specify the script code to run.
+                ps.AddScript("Invoke-Command -ComputerName server-01 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'ConvCold'}).count }");
+
+                // execute the script and await the result.
+                var pipelineObjects = ps.Invoke();
+
+                Int32 processCount = 0;
+
+                // print the resulting pipeline objects to the console.
+                foreach (var item in pipelineObjects)
+                {
+                    processCount = Convert.ToInt32(item.BaseObject.ToString());
+                }
+
+                nwInvoiceButton.BeginInvoke(new MethodInvoker(() =>
+                {
+                    if (Convert.ToInt32(processCount) == 1)
+                    {
+                        nwInvoiceButton.Text = "OK";
+                        nwInvoiceButton.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        nwInvoiceButton.Text = "X";
+                        nwInvoiceButton.BackColor = Color.Red;
+                        MessageBox.Show("Die Rechnungsverarbeitung von Nordwest läuft derzeit nicht.");
+                    }
+                }));
+            }
+        }
+
+        /*
+        * 
+        */
         private void CheckDHLDPDApi()
         {      
             try
@@ -356,6 +403,54 @@ namespace SystemHealth
                     errorFilesButton.Text = "X";
                     errorFilesButton.BackColor = Color.Red;
                     MessageBox.Show("Es gibt ERROR Files bei den Bestellabholungen.");
+                }
+            }));
+        }
+
+        /*
+        * 
+        */
+        private void CheckForPicardErrorFiles()
+        {
+            String sDir = "W:\\Picard\\DESADV\\ERROR";
+            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
+
+            picardErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (files.Count() == 0)
+                {
+                    picardErrorFilesButton.Text = "OK";
+                    picardErrorFilesButton.BackColor = Color.Green;
+                }
+                else
+                {
+                    picardErrorFilesButton.Text = "X";
+                    picardErrorFilesButton.BackColor = Color.Red;
+                    MessageBox.Show("Es gibt ERROR Files bei Picard.");
+                }
+            }));
+        }
+
+        /*
+        * 
+        */
+        private void CheckForMercateoErrorFiles()
+        {
+            String sDir = "W:\\Mercateo\\ORDERS\\ERROR";
+            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
+
+            mercateoErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (files.Count() == 0)
+                {
+                    mercateoErrorFilesButton.Text = "OK";
+                    mercateoErrorFilesButton.BackColor = Color.Green;
+                }
+                else
+                {
+                    mercateoErrorFilesButton.Text = "X";
+                    mercateoErrorFilesButton.BackColor = Color.Red;
+                    MessageBox.Show("Es gibt ERROR Files bei Mercateo.");
                 }
             }));
         }
