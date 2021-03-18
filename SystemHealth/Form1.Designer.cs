@@ -64,6 +64,8 @@
             this.picardErrorFilesButton = new System.Windows.Forms.Button();
             this.nwInvoiceButton = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
+            this.toolineoErrorFilesButton = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -423,11 +425,33 @@
             this.label21.TabIndex = 37;
             this.label21.Text = "NW-Invoice";
             // 
+            // toolineoErrorFilesButton
+            // 
+            this.toolineoErrorFilesButton.Enabled = false;
+            this.toolineoErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolineoErrorFilesButton.Location = new System.Drawing.Point(258, 351);
+            this.toolineoErrorFilesButton.Name = "toolineoErrorFilesButton";
+            this.toolineoErrorFilesButton.Size = new System.Drawing.Size(75, 75);
+            this.toolineoErrorFilesButton.TabIndex = 38;
+            this.toolineoErrorFilesButton.Text = " ";
+            this.toolineoErrorFilesButton.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(259, 412);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(48, 13);
+            this.label22.TabIndex = 39;
+            this.label22.Text = "Toolineo";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 622);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.toolineoErrorFilesButton);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.nwInvoiceButton);
             this.Controls.Add(this.label20);
@@ -510,6 +534,8 @@
         private System.Windows.Forms.Button picardErrorFilesButton;
         private System.Windows.Forms.Button nwInvoiceButton;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button toolineoErrorFilesButton;
+        private System.Windows.Forms.Label label22;
     }
 }
 

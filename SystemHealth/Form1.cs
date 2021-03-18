@@ -90,6 +90,9 @@ namespace SystemHealth
                     CheckNWProcess();
                     updateProgressBar.PerformStep();
 
+                    CheckForToolineoErrorFiles();
+                    updateProgressBar.PerformStep();
+
                     updateProgressBar.Value = 100;
                 }));
 
@@ -451,6 +454,30 @@ namespace SystemHealth
                     mercateoErrorFilesButton.Text = "X";
                     mercateoErrorFilesButton.BackColor = Color.Red;
                     MessageBox.Show("Es gibt ERROR Files bei Mercateo.");
+                }
+            }));
+        }
+
+        /*
+        * 
+        */
+        private void CheckForToolineoErrorFiles()
+        {
+            String sDir = "W:\\Toolineo\\ORDERS\\ERROR";
+            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
+
+            toolineoErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (files.Count() == 0)
+                {
+                    toolineoErrorFilesButton.Text = "OK";
+                    toolineoErrorFilesButton.BackColor = Color.Green;
+                }
+                else
+                {
+                    toolineoErrorFilesButton.Text = "X";
+                    toolineoErrorFilesButton.BackColor = Color.Red;
+                    MessageBox.Show("Es gibt ERROR Files bei Toolineo.");
                 }
             }));
         }
