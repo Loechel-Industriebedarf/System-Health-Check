@@ -58,16 +58,10 @@ namespace SystemHealth
                     updateProgressBar.Value = 0;
                     Int32 processCount = 0;
 
-                    CheckEbayOrders();
+                    CheckOrderCount(ebayOrdersButton, "BELEGART = '8' OR BELEGART = '11' OR BELEGART = '12' OR BELEGART = '14' OR BELEGART = '18'");
                     updateProgressBar.PerformStep();
 
-                    CheckAmazonOrders();
-                    updateProgressBar.PerformStep();
-
-                    CheckDHLDPDApi();
-                    updateProgressBar.PerformStep();
-
-                    CheckLastOrderExecute();
+                    CheckOrderCount(amazonOrdersButton, "BELEGART = '7'");
                     updateProgressBar.PerformStep();
 
                     processCount = ExecutePowershellProcessCount("ConvCold", "server-01");
@@ -98,6 +92,12 @@ namespace SystemHealth
                     CheckForErrorFiles(toolineoErrorFilesButton, "W:\\Toolineo\\ORDERS\\ERROR", "*.xml", "Es gibt ERROR Files bei Toolineo.");
                     updateProgressBar.PerformStep();
 
+                    CheckDHLDPDApi();
+                    updateProgressBar.PerformStep();
+
+                    CheckLastOrderExecute();
+                    updateProgressBar.PerformStep();
+
                     updateProgressBar.Value = 100;
                 }));
 
@@ -114,63 +114,26 @@ namespace SystemHealth
         }
 
 
-
-        /*
-         * 
-         */
-        private void CheckEbayOrders()
-        {
-            OdbcDataReader dr = 
-                ExecuteReadSql("SELECT COUNT(*) AS Counter FROM dbo.AUFTRAGSKOPF WHERE (BELEGART = '8' OR BELEGART = '11' OR BELEGART = '12' OR BELEGART = '14' OR BELEGART = '18') AND ERFASSUNGSDATUM > DATEADD(HOUR, -1, GETDATE())");
-
-            while (dr.Read())
-            {
-                String orderCounter = dr["Counter"].ToString();
-
-                ebayOrdersButton.BeginInvoke(new MethodInvoker(() =>
-                {
-                    ebayOrdersButton.Text = orderCounter;
-
-                    if (Convert.ToInt32(orderCounter) >= 1)
-                    {
-                        ebayOrdersButton.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        ebayOrdersButton.BackColor = Color.Red;
-                        //MessageBox.Show("Die Ebay Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
-                    }
-                    
-                }));   
-            }
-        }
-
-
-
-        /*
-         * 
-         */
-        private void CheckAmazonOrders()
+        private void CheckOrderCount(Button b, String whereQuery)
         {
             OdbcDataReader dr =
-                ExecuteReadSql("SELECT COUNT(*) AS Counter FROM dbo.AUFTRAGSKOPF WHERE BELEGART = '7' AND ERFASSUNGSDATUM > DATEADD(HOUR, -1, GETDATE())");
+                ExecuteReadSql("SELECT COUNT(*) AS Counter FROM dbo.AUFTRAGSKOPF WHERE (" + whereQuery + ") AND ERFASSUNGSDATUM > DATEADD(HOUR, -1, GETDATE())");
 
             while (dr.Read())
             {
                 String orderCounter = dr["Counter"].ToString();
 
-                amazonOrdersButton.BeginInvoke(new MethodInvoker(() =>
+                b.BeginInvoke(new MethodInvoker(() =>
                 {
-                    amazonOrdersButton.Text = orderCounter;
+                    b.Text = orderCounter;
 
                     if (Convert.ToInt32(orderCounter) >= 1)
                     {
-                        amazonOrdersButton.BackColor = Color.Green;
+                        b.BackColor = Color.Green;
                     }
                     else
                     {
-                        amazonOrdersButton.BackColor = Color.Red;
-                        //MessageBox.Show("Die Amazon Prozesse scheinen nicht zu laufen. Keine Bestellungen in der letzten Stunde.");
+                        b.BackColor = Color.Red;
                     }
 
                 }));
