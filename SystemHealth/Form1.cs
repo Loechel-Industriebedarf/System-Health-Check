@@ -56,6 +56,7 @@ namespace SystemHealth
                 updateProgressBar.BeginInvoke(new MethodInvoker(() =>
                 {
                     updateProgressBar.Value = 0;
+                    Int32 processCount = 0;
 
                     CheckEbayOrders();
                     updateProgressBar.PerformStep();
@@ -63,22 +64,26 @@ namespace SystemHealth
                     CheckAmazonOrders();
                     updateProgressBar.PerformStep();
 
-                    CheckAmazonProcesses();
-                    updateProgressBar.PerformStep();
-
-                    CheckEbayProcesses();
-                    updateProgressBar.PerformStep();
-
-                    CheckDHLProcess();
-                    updateProgressBar.PerformStep();
-
                     CheckDHLDPDApi();
                     updateProgressBar.PerformStep();
 
-                    CheckNWProcess();
+                    CheckLastOrderExecute();
                     updateProgressBar.PerformStep();
 
-                    CheckLastOrderExecute();
+                    processCount = ExecutePowershellProcessCount("ConvCold", "server-01");
+                    CheckProcessCount(nwInvoiceButton, processCount, processCount == 1, "Die Rechnungsverarbeitung von Nordwest läuft derzeit nicht.");
+                    updateProgressBar.PerformStep();
+
+                    processCount = ExecutePowershellProcessCount("DHL");
+                    CheckProcessCount(dhlProcessButton, processCount, processCount != 1, "");
+                    updateProgressBar.PerformStep();
+
+                    processCount = ExecutePowershellProcessCount("Amazon");
+                    CheckProcessCount(amazonProcessButton, processCount, processCount == 2, "Die Amazon Prozesse scheinen nicht zu laufen.");
+                    updateProgressBar.PerformStep();
+
+                    processCount = ExecutePowershellProcessCount("timeout") + ExecutePowershellProcessCount("cmd");
+                    CheckProcessCount(ebayProcessButton, processCount, processCount >= 1, "Die Ebay Prozesse scheinen nicht zu laufen.");
                     updateProgressBar.PerformStep();
 
                     CheckForErrorFiles(errorFilesButton, "S:\\", "*ERROR*.csv", "Es gibt ERROR Files bei den Bestellabholungen.");
@@ -107,6 +112,8 @@ namespace SystemHealth
 
             }
         }
+
+
 
         /*
          * 
@@ -138,6 +145,8 @@ namespace SystemHealth
             }
         }
 
+
+
         /*
          * 
          */
@@ -168,15 +177,21 @@ namespace SystemHealth
             }
         }
 
+
+
         /*
-         * 
+         * Default value: server-03
          */
-        private void CheckAmazonProcesses()
+        private Int32 ExecutePowershellProcessCount(String powershellScript)
+        {
+            return ExecutePowershellProcessCount(powershellScript, "server-03");
+        }
+        private Int32 ExecutePowershellProcessCount(String powershellScript, String server)
         {
             using (PowerShell ps = PowerShell.Create())
             {
                 // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'Amazon'}).count }");
+                ps.AddScript("Invoke-Command -ComputerName " + server + " -ScriptBlock { (Get-Process | Where-Object {$_.Name -match '" + powershellScript + "'}).count }");
 
                 // execute the script and await the result.
                 var pipelineObjects = ps.Invoke();
@@ -189,147 +204,42 @@ namespace SystemHealth
                     processCount = Convert.ToInt32(item.BaseObject.ToString());
                 }
 
-                amazonProcessButton.BeginInvoke(new MethodInvoker(() =>
-                {
-                    if (Convert.ToInt32(processCount) == 2)
-                    {
-                        amazonProcessButton.Text = "OK";
-                        amazonProcessButton.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        amazonProcessButton.Text = "X";
-                        amazonProcessButton.BackColor = Color.Red;
-                        MessageBox.Show("Die Amazon Prozesse scheinen nicht zu laufen.");
-                    }
-                }));
+                return processCount;
             }
         }
+
+
 
         /*
          * 
          */
-        private void CheckEbayProcesses()
+        private void CheckProcessCount(Button b, Int32 processCount, Boolean check, String errorMsg)
         {
-            using (PowerShell ps = PowerShell.Create())
+            b.BeginInvoke(new MethodInvoker(() =>
             {
-                // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'timeout'}).count }");
-
-                // execute the script and await the result.
-                var pipelineObjects = ps.Invoke();
-
-                Int32 processCount = 0;
-
-                // print the resulting pipeline objects to the console.
-                foreach (var item in pipelineObjects)
+                if (check)
                 {
-                    processCount = Convert.ToInt32(item.BaseObject.ToString());
+                    b.Text = "OK";
+                    b.BackColor = Color.Green;
                 }
-
-                // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'cmd'}).count }");
-
-                // execute the script and await the result.
-                pipelineObjects = ps.Invoke();
-
-                // print the resulting pipeline objects to the console.
-                foreach (var item in pipelineObjects)
+                else
                 {
-                    processCount += Convert.ToInt32(item.BaseObject.ToString());
-                }
-
-                ebayProcessButton.BeginInvoke(new MethodInvoker(() =>
-                {
-                    if (Convert.ToInt32(processCount) >= 1)
+                    b.Text = "X";
+                    if (String.IsNullOrEmpty(errorMsg))
                     {
-                        ebayProcessButton.Text = "OK";
-                        ebayProcessButton.BackColor = Color.Green;
+                        b.BackColor = Color.Yellow;
                     }
                     else
                     {
-                        ebayProcessButton.Text = "X";
-                        ebayProcessButton.BackColor = Color.Red;
-                        MessageBox.Show("Die Ebay Prozesse scheinen nicht zu laufen.");
+                        b.BackColor = Color.Red;
+                        MessageBox.Show(errorMsg);
                     }
-                }));
-            }
-        }
 
-        /*
-        * 
-        */
-        private void CheckDHLProcess()
-        {
-            using (PowerShell ps = PowerShell.Create())
-            {
-                // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-03 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'DHL'}).count }");
-
-                // execute the script and await the result.
-                var pipelineObjects = ps.Invoke();
-
-                Int32 processCount = 0;
-
-                // print the resulting pipeline objects to the console.
-                foreach (var item in pipelineObjects)
-                {
-                    processCount = Convert.ToInt32(item.BaseObject.ToString());
                 }
-
-                dhlProcessButton.BeginInvoke(new MethodInvoker(() =>
-                {  
-                    if (Convert.ToInt32(processCount) != 1)
-                    {
-                        dhlProcessButton.Text = "OK";
-                        dhlProcessButton.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        dhlProcessButton.Text = "X";
-                        dhlProcessButton.BackColor = Color.Yellow;
-                    }
-                }));
-            }
+            }));
         }
 
-        /*
-        * 
-        */
-        private void CheckNWProcess()
-        {
-            using (PowerShell ps = PowerShell.Create())
-            {
-                // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName server-01 -ScriptBlock { (Get-Process | Where-Object {$_.Name -match 'ConvCold'}).count }");
 
-                // execute the script and await the result.
-                var pipelineObjects = ps.Invoke();
-
-                Int32 processCount = 0;
-
-                // print the resulting pipeline objects to the console.
-                foreach (var item in pipelineObjects)
-                {
-                    processCount = Convert.ToInt32(item.BaseObject.ToString());
-                }
-
-                nwInvoiceButton.BeginInvoke(new MethodInvoker(() =>
-                {
-                    if (Convert.ToInt32(processCount) == 1)
-                    {
-                        nwInvoiceButton.Text = "OK";
-                        nwInvoiceButton.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        nwInvoiceButton.Text = "X";
-                        nwInvoiceButton.BackColor = Color.Red;
-                        MessageBox.Show("Die Rechnungsverarbeitung von Nordwest läuft derzeit nicht.");
-                    }
-                }));
-            }
-        }
 
         /*
         * 
