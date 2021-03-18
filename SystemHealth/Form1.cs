@@ -75,22 +75,22 @@ namespace SystemHealth
                     CheckDHLDPDApi();
                     updateProgressBar.PerformStep();
 
-                    CheckForErrorFiles();
+                    CheckNWProcess();
                     updateProgressBar.PerformStep();
 
                     CheckLastOrderExecute();
                     updateProgressBar.PerformStep();
 
-                    CheckForPicardErrorFiles();
+                    CheckForErrorFiles(errorFilesButton, "S:\\", "*ERROR*.csv", "Es gibt ERROR Files bei den Bestellabholungen.");
                     updateProgressBar.PerformStep();
 
-                    CheckForMercateoErrorFiles();
+                    CheckForErrorFiles(picardErrorFilesButton, "W:\\Picard\\DESADV\\ERROR", "*.xml", "Es gibt ERROR Files bei Picard.");
                     updateProgressBar.PerformStep();
 
-                    CheckNWProcess();
+                    CheckForErrorFiles(mercateoErrorFilesButton, "W:\\Mercateo\\ORDERS\\ERROR", "*.xml", "Es gibt ERROR Files bei Mercateo.");
                     updateProgressBar.PerformStep();
 
-                    CheckForToolineoErrorFiles();
+                    CheckForErrorFiles(toolineoErrorFilesButton, "W:\\Toolineo\\ORDERS\\ERROR", "*.xml", "Es gibt ERROR Files bei Toolineo.");
                     updateProgressBar.PerformStep();
 
                     updateProgressBar.Value = 100;
@@ -386,101 +386,32 @@ namespace SystemHealth
             }
         }
 
-        /*
-        * 
-        */
-        private void CheckForErrorFiles()
-        {
-            String sDir = "S:\\";
-            string[] files = Directory.GetFiles(sDir, "*ERROR*.csv", SearchOption.AllDirectories);
 
-            errorFilesButton.BeginInvoke(new MethodInvoker(() =>
+
+        /*
+         * 
+         */
+        private void CheckForErrorFiles(Button b, String sDir, String search, String errorMsg)
+        {
+            string[] files = Directory.GetFiles(sDir, search, SearchOption.AllDirectories);
+
+            b.BeginInvoke(new MethodInvoker(() =>
             {
                 if (files.Count() == 0)
                 {
-                    errorFilesButton.Text = "OK";
-                    errorFilesButton.BackColor = Color.Green;
+                    b.Text = "OK";
+                    b.BackColor = Color.Green;
                 }
                 else
                 {
-                    errorFilesButton.Text = "X";
-                    errorFilesButton.BackColor = Color.Red;
-                    MessageBox.Show("Es gibt ERROR Files bei den Bestellabholungen.");
+                    b.Text = "X";
+                    b.BackColor = Color.Red;
+                    MessageBox.Show(errorMsg);
                 }
             }));
         }
 
-        /*
-        * 
-        */
-        private void CheckForPicardErrorFiles()
-        {
-            String sDir = "W:\\Picard\\DESADV\\ERROR";
-            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
 
-            picardErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
-            {
-                if (files.Count() == 0)
-                {
-                    picardErrorFilesButton.Text = "OK";
-                    picardErrorFilesButton.BackColor = Color.Green;
-                }
-                else
-                {
-                    picardErrorFilesButton.Text = "X";
-                    picardErrorFilesButton.BackColor = Color.Red;
-                    MessageBox.Show("Es gibt ERROR Files bei Picard.");
-                }
-            }));
-        }
-
-        /*
-        * 
-        */
-        private void CheckForMercateoErrorFiles()
-        {
-            String sDir = "W:\\Mercateo\\ORDERS\\ERROR";
-            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
-
-            mercateoErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
-            {
-                if (files.Count() == 0)
-                {
-                    mercateoErrorFilesButton.Text = "OK";
-                    mercateoErrorFilesButton.BackColor = Color.Green;
-                }
-                else
-                {
-                    mercateoErrorFilesButton.Text = "X";
-                    mercateoErrorFilesButton.BackColor = Color.Red;
-                    MessageBox.Show("Es gibt ERROR Files bei Mercateo.");
-                }
-            }));
-        }
-
-        /*
-        * 
-        */
-        private void CheckForToolineoErrorFiles()
-        {
-            String sDir = "W:\\Toolineo\\ORDERS\\ERROR";
-            string[] files = Directory.GetFiles(sDir, "*.xml", SearchOption.AllDirectories);
-
-            toolineoErrorFilesButton.BeginInvoke(new MethodInvoker(() =>
-            {
-                if (files.Count() == 0)
-                {
-                    toolineoErrorFilesButton.Text = "OK";
-                    toolineoErrorFilesButton.BackColor = Color.Green;
-                }
-                else
-                {
-                    toolineoErrorFilesButton.Text = "X";
-                    toolineoErrorFilesButton.BackColor = Color.Red;
-                    MessageBox.Show("Es gibt ERROR Files bei Toolineo.");
-                }
-            }));
-        }
 
         /*
         * 
