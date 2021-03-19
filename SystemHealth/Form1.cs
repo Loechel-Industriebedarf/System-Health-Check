@@ -23,7 +23,7 @@ namespace SystemHealth
         }
 
         /*
-         * 
+         * When the form is loaded, a timer is started. Every 10 minutes the function StartAllChecks() gets executed.
          */
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace SystemHealth
         }
 
         /*
-         * 
+         * Helper function, that gets executed, when the timer from Form1_Load runs out.
          */
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -47,7 +47,7 @@ namespace SystemHealth
 
 
         /*
-         * 
+         * Primary function. Executes all checks for example Amazon errors or programs that are not running.
          */
         private void StartAllChecks()
         {
@@ -114,6 +114,11 @@ namespace SystemHealth
         }
 
 
+
+        /*
+         * @param Button b                      The button, that should be updated, based on the functions result (color/text)
+         * @param String whereQuery             A where query to restrict the sql-query further
+         */
         private void CheckOrderCount(Button b, String whereQuery)
         {
             OdbcDataReader dr =
@@ -143,18 +148,20 @@ namespace SystemHealth
 
 
         /*
-         * Default value: server-03
+         * @param String powershellProcessName  The name of the process we are looking for
+         * @param String server                 The server, on which the powershell script should be executed (default: server-03)
+         * @return Int32 processCount           Number of processes the powershell script found
          */
-        private Int32 ExecutePowershellProcessCount(String powershellScript)
+        private Int32 ExecutePowershellProcessCount(String powershellProcessName)
         {
-            return ExecutePowershellProcessCount(powershellScript, "server-03");
+            return ExecutePowershellProcessCount(powershellProcessName, "server-03");
         }
-        private Int32 ExecutePowershellProcessCount(String powershellScript, String server)
+        private Int32 ExecutePowershellProcessCount(String powershellProcessName, String server)
         {
             using (PowerShell ps = PowerShell.Create())
             {
                 // specify the script code to run.
-                ps.AddScript("Invoke-Command -ComputerName " + server + " -ScriptBlock { (Get-Process | Where-Object {$_.Name -match '" + powershellScript + "'}).count }");
+                ps.AddScript("Invoke-Command -ComputerName " + server + " -ScriptBlock { (Get-Process | Where-Object {$_.Name -match '" + powershellProcessName + "'}).count }");
 
                 // execute the script and await the result.
                 var pipelineObjects = ps.Invoke();
@@ -174,7 +181,10 @@ namespace SystemHealth
 
 
         /*
-         * 
+         * @param Button b                      The button, that should be updated, based on the functions result (color/text)
+         * @param Boolean check                 True/false condition to choose, which color/text the button should get (Example: processCount == 1)
+         * @param String errorMsg               Error message, that will be displayed, if check is false. If the errorMsg is empty, no message will be shown
+         *                                          and the button will be yellow instead of red
          */
         private void CheckProcessCount(Button b, Int32 processCount, Boolean check, String errorMsg)
         {
@@ -205,7 +215,32 @@ namespace SystemHealth
 
 
         /*
-        * 
+         * 
+         */
+        private void CheckForErrorFiles(Button b, String sDir, String search, String errorMsg)
+        {
+            string[] files = Directory.GetFiles(sDir, search, SearchOption.AllDirectories);
+
+            b.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (files.Count() == 0)
+                {
+                    b.Text = "OK";
+                    b.BackColor = Color.Green;
+                }
+                else
+                {
+                    b.Text = "X";
+                    b.BackColor = Color.Red;
+                    MessageBox.Show(errorMsg);
+                }
+            }));
+        }
+
+
+
+        /*
+        * Checks, if the DHL and DPD APIs are reachable.
         */
         private void CheckDHLDPDApi()
         {      
@@ -262,31 +297,6 @@ namespace SystemHealth
 
 
         /*
-         * 
-         */
-        private void CheckForErrorFiles(Button b, String sDir, String search, String errorMsg)
-        {
-            string[] files = Directory.GetFiles(sDir, search, SearchOption.AllDirectories);
-
-            b.BeginInvoke(new MethodInvoker(() =>
-            {
-                if (files.Count() == 0)
-                {
-                    b.Text = "OK";
-                    b.BackColor = Color.Green;
-                }
-                else
-                {
-                    b.Text = "X";
-                    b.BackColor = Color.Red;
-                    MessageBox.Show(errorMsg);
-                }
-            }));
-        }
-
-
-
-        /*
         * 
         */
         private void CheckLastOrderExecute()
@@ -319,6 +329,8 @@ namespace SystemHealth
             }));
         }
 
+
+
         /*
          * 
          */
@@ -340,24 +352,129 @@ namespace SystemHealth
             }
         }
 
+
+
+        /*
+         * Allgemeine Bestellungen buttons
+         */
+        private void errorFilesButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\");
+        }
+
+        private void lastRunButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\");
+        }
+
+
+
+        /*
+         * Amazon Bestellungen buttons
+         */
+        private void amazonProcessButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\Amazon");
+        }
+
+        private void amazonOrdersButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\Amazon");
+        }
+
+
+
+        /*
+         * Ebay/Real/Conrad etc. Bestellungen buttons
+         */
+        private void ebayProcessButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\");
+        }
+
+        private void ebayOrdersButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("S:\\");
+        }
+
+
+
+        /*
+         * Picard/Mercateo/Nordwest/FTP Buttons
+         */
+
+        private void mercateoErrorFilesButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("W:\\Mercateo\\ORDERS\\ERROR");
+        }
+
+        private void picardErrorFilesButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("W:\\Picard\\DESADV\\ERROR");
+        }
+
+        private void nwInvoiceButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolineoErrorFilesButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("W:\\Toolineo\\ORDERS\\ERROR");
+        }
+
+
+
+        /*
+         * DHL Buttons
+         */
+
+        private void dhlProcessButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://status.shipcloud.io/");
+        }
+
+        private void dhlApiButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://status.shipcloud.io/");
+        }
+
+        private void dpdApiButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://status.shipcloud.io/");
+
+        }
+
+
+
+        /*
+         * UPDATE! Button
+         */
+
+        private void updateStatsManuallyButton_Click(object sender, EventArgs e)
+        {
+            StartAllChecks();
+        }
+
+        
+
+
+
+
+
+
+
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void ebayOrdersButton_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void lastUpdatedLabel_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void updateStatsManuallyButton_Click(object sender, EventArgs e)
-        {
-            StartAllChecks();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -374,5 +491,7 @@ namespace SystemHealth
         {
 
         }
+
+
     }
 }

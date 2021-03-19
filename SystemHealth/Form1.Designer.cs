@@ -81,7 +81,6 @@
             // 
             // ebayOrdersButton
             // 
-            this.ebayOrdersButton.Enabled = false;
             this.ebayOrdersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ebayOrdersButton.Location = new System.Drawing.Point(96, 246);
             this.ebayOrdersButton.Name = "ebayOrdersButton";
@@ -113,7 +112,6 @@
             // 
             // amazonOrdersButton
             // 
-            this.amazonOrdersButton.Enabled = false;
             this.amazonOrdersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amazonOrdersButton.Location = new System.Drawing.Point(96, 141);
             this.amazonOrdersButton.Name = "amazonOrdersButton";
@@ -121,6 +119,7 @@
             this.amazonOrdersButton.TabIndex = 4;
             this.amazonOrdersButton.Text = " ";
             this.amazonOrdersButton.UseVisualStyleBackColor = true;
+            this.amazonOrdersButton.Click += new System.EventHandler(this.amazonOrdersButton_Click);
             // 
             // label2
             // 
@@ -134,7 +133,6 @@
             // 
             // amazonProcessButton
             // 
-            this.amazonProcessButton.Enabled = false;
             this.amazonProcessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amazonProcessButton.Location = new System.Drawing.Point(15, 141);
             this.amazonProcessButton.Name = "amazonProcessButton";
@@ -142,10 +140,10 @@
             this.amazonProcessButton.TabIndex = 6;
             this.amazonProcessButton.Text = " ";
             this.amazonProcessButton.UseVisualStyleBackColor = true;
+            this.amazonProcessButton.Click += new System.EventHandler(this.amazonProcessButton_Click);
             // 
             // ebayProcessButton
             // 
-            this.ebayProcessButton.Enabled = false;
             this.ebayProcessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ebayProcessButton.Location = new System.Drawing.Point(15, 246);
             this.ebayProcessButton.Name = "ebayProcessButton";
@@ -153,10 +151,10 @@
             this.ebayProcessButton.TabIndex = 7;
             this.ebayProcessButton.Text = " ";
             this.ebayProcessButton.UseVisualStyleBackColor = true;
+            this.ebayProcessButton.Click += new System.EventHandler(this.ebayProcessButton_Click);
             // 
             // dhlProcessButton
             // 
-            this.dhlProcessButton.Enabled = false;
             this.dhlProcessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dhlProcessButton.Location = new System.Drawing.Point(16, 461);
             this.dhlProcessButton.Name = "dhlProcessButton";
@@ -164,10 +162,10 @@
             this.dhlProcessButton.TabIndex = 8;
             this.dhlProcessButton.Text = " ";
             this.dhlProcessButton.UseVisualStyleBackColor = true;
+            this.dhlProcessButton.Click += new System.EventHandler(this.dhlProcessButton_Click);
             // 
             // dhlApiButton
             // 
-            this.dhlApiButton.Enabled = false;
             this.dhlApiButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dhlApiButton.Location = new System.Drawing.Point(97, 461);
             this.dhlApiButton.Name = "dhlApiButton";
@@ -175,6 +173,7 @@
             this.dhlApiButton.TabIndex = 10;
             this.dhlApiButton.Text = " ";
             this.dhlApiButton.UseVisualStyleBackColor = true;
+            this.dhlApiButton.Click += new System.EventHandler(this.dhlApiButton_Click);
             // 
             // label4
             // 
@@ -225,7 +224,6 @@
             // 
             // dpdApiButton
             // 
-            this.dpdApiButton.Enabled = false;
             this.dpdApiButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpdApiButton.Location = new System.Drawing.Point(178, 461);
             this.dpdApiButton.Name = "dpdApiButton";
@@ -233,6 +231,7 @@
             this.dpdApiButton.TabIndex = 17;
             this.dpdApiButton.Text = " ";
             this.dpdApiButton.UseVisualStyleBackColor = true;
+            this.dpdApiButton.Click += new System.EventHandler(this.dpdApiButton_Click);
             // 
             // label9
             // 
@@ -271,7 +270,6 @@
             // 
             // errorFilesButton
             // 
-            this.errorFilesButton.Enabled = false;
             this.errorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorFilesButton.Location = new System.Drawing.Point(12, 36);
             this.errorFilesButton.Name = "errorFilesButton";
@@ -279,6 +277,7 @@
             this.errorFilesButton.TabIndex = 22;
             this.errorFilesButton.Text = " ";
             this.errorFilesButton.UseVisualStyleBackColor = true;
+            this.errorFilesButton.Click += new System.EventHandler(this.errorFilesButton_Click);
             // 
             // label11
             // 
@@ -301,7 +300,6 @@
             // 
             // lastRunButton
             // 
-            this.lastRunButton.Enabled = false;
             this.lastRunButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastRunButton.Location = new System.Drawing.Point(97, 36);
             this.lastRunButton.Name = "lastRunButton";
@@ -309,6 +307,7 @@
             this.lastRunButton.TabIndex = 25;
             this.lastRunButton.Text = " ";
             this.lastRunButton.UseVisualStyleBackColor = true;
+            this.lastRunButton.Click += new System.EventHandler(this.lastRunButton_Click);
             // 
             // label13
             // 
@@ -367,7 +366,6 @@
             // 
             // mercateoErrorFilesButton
             // 
-            this.mercateoErrorFilesButton.Enabled = false;
             this.mercateoErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mercateoErrorFilesButton.Location = new System.Drawing.Point(16, 351);
             this.mercateoErrorFilesButton.Name = "mercateoErrorFilesButton";
@@ -375,6 +373,7 @@
             this.mercateoErrorFilesButton.TabIndex = 32;
             this.mercateoErrorFilesButton.Text = " ";
             this.mercateoErrorFilesButton.UseVisualStyleBackColor = true;
+            this.mercateoErrorFilesButton.Click += new System.EventHandler(this.mercateoErrorFilesButton_Click);
             // 
             // label19
             // 
@@ -396,7 +395,6 @@
             // 
             // picardErrorFilesButton
             // 
-            this.picardErrorFilesButton.Enabled = false;
             this.picardErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.picardErrorFilesButton.Location = new System.Drawing.Point(96, 351);
             this.picardErrorFilesButton.Name = "picardErrorFilesButton";
@@ -404,10 +402,10 @@
             this.picardErrorFilesButton.TabIndex = 34;
             this.picardErrorFilesButton.Text = " ";
             this.picardErrorFilesButton.UseVisualStyleBackColor = true;
+            this.picardErrorFilesButton.Click += new System.EventHandler(this.picardErrorFilesButton_Click);
             // 
             // nwInvoiceButton
             // 
-            this.nwInvoiceButton.Enabled = false;
             this.nwInvoiceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nwInvoiceButton.Location = new System.Drawing.Point(177, 351);
             this.nwInvoiceButton.Name = "nwInvoiceButton";
@@ -415,6 +413,7 @@
             this.nwInvoiceButton.TabIndex = 36;
             this.nwInvoiceButton.Text = " ";
             this.nwInvoiceButton.UseVisualStyleBackColor = true;
+            this.nwInvoiceButton.Click += new System.EventHandler(this.nwInvoiceButton_Click);
             // 
             // label21
             // 
@@ -427,7 +426,6 @@
             // 
             // toolineoErrorFilesButton
             // 
-            this.toolineoErrorFilesButton.Enabled = false;
             this.toolineoErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolineoErrorFilesButton.Location = new System.Drawing.Point(258, 351);
             this.toolineoErrorFilesButton.Name = "toolineoErrorFilesButton";
@@ -435,6 +433,7 @@
             this.toolineoErrorFilesButton.TabIndex = 38;
             this.toolineoErrorFilesButton.Text = " ";
             this.toolineoErrorFilesButton.UseVisualStyleBackColor = true;
+            this.toolineoErrorFilesButton.Click += new System.EventHandler(this.toolineoErrorFilesButton_Click);
             // 
             // label22
             // 
