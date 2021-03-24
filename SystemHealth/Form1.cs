@@ -205,7 +205,7 @@ namespace SystemHealth
                     else
                     {
                         b.BackColor = Color.Red;
-                        MessageBox.Show(errorMsg);
+                        ShowErrorMsg(errorMsg);
                     }
 
                 }
@@ -232,7 +232,7 @@ namespace SystemHealth
                 {
                     b.Text = "X";
                     b.BackColor = Color.Red;
-                    MessageBox.Show(errorMsg);
+                    ShowErrorMsg(errorMsg);
                 }
             }));
         }
@@ -267,7 +267,7 @@ namespace SystemHealth
                     {
                         dhlApiButton.Text = "X";
                         dhlApiButton.BackColor = Color.Red;
-                        MessageBox.Show("Die DHL API hat derzeit Probleme.");
+                        ShowErrorMsg("Die DHL API hat derzeit Probleme.");
                     }
                 }));
 
@@ -283,7 +283,7 @@ namespace SystemHealth
                     {
                         dpdApiButton.Text = "X";
                         dpdApiButton.BackColor = Color.Red;
-                        MessageBox.Show("Die DPD API hat derzeit Probleme.");
+                        ShowErrorMsg("Die DPD API hat derzeit Probleme.");
                     }
                 }));
 
@@ -324,7 +324,7 @@ namespace SystemHealth
                 else
                 {
                     lastRunButton.BackColor = Color.Red;
-                    MessageBox.Show("Die Ebay/Real/Conrad etc. Bestellungen werden nicht mehr importiert!");
+                    ShowErrorMsg("Die Ebay/Real/Conrad etc. Bestellungen werden nicht mehr importiert!");
                 }    
             }));
         }
@@ -350,6 +350,17 @@ namespace SystemHealth
             {
                 return null;
             }
+        }
+
+
+
+        /*
+         * 
+         */
+        private void ShowErrorMsg(String err)
+        {
+            FlashWindow.Flash(this);
+            //MessageBox.Show(err);
         }
 
 
