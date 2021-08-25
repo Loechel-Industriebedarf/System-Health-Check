@@ -66,6 +66,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.toolineoErrorFilesButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
+            this.mercateoErrorFilesButton2 = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -104,7 +106,7 @@
             // 
             this.updateStatsManuallyButton.Location = new System.Drawing.Point(201, 593);
             this.updateStatsManuallyButton.Name = "updateStatsManuallyButton";
-            this.updateStatsManuallyButton.Size = new System.Drawing.Size(145, 25);
+            this.updateStatsManuallyButton.Size = new System.Drawing.Size(214, 25);
             this.updateStatsManuallyButton.TabIndex = 3;
             this.updateStatsManuallyButton.Text = "UPDATE!";
             this.updateStatsManuallyButton.UseVisualStyleBackColor = true;
@@ -265,7 +267,7 @@
             // 
             this.updateProgressBar.Location = new System.Drawing.Point(201, 562);
             this.updateProgressBar.Name = "updateProgressBar";
-            this.updateProgressBar.Size = new System.Drawing.Size(145, 25);
+            this.updateProgressBar.Size = new System.Drawing.Size(214, 25);
             this.updateProgressBar.TabIndex = 21;
             // 
             // errorFilesButton
@@ -380,14 +382,14 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(17, 412);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(52, 13);
+            this.label19.Size = new System.Drawing.Size(71, 13);
             this.label19.TabIndex = 33;
-            this.label19.Text = "Mercateo";
+            this.label19.Text = "Mercateo OR";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(97, 412);
+            this.label20.Location = new System.Drawing.Point(179, 412);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(37, 13);
             this.label20.TabIndex = 35;
@@ -396,7 +398,7 @@
             // picardErrorFilesButton
             // 
             this.picardErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.picardErrorFilesButton.Location = new System.Drawing.Point(96, 351);
+            this.picardErrorFilesButton.Location = new System.Drawing.Point(178, 351);
             this.picardErrorFilesButton.Name = "picardErrorFilesButton";
             this.picardErrorFilesButton.Size = new System.Drawing.Size(75, 75);
             this.picardErrorFilesButton.TabIndex = 34;
@@ -407,7 +409,7 @@
             // nwInvoiceButton
             // 
             this.nwInvoiceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nwInvoiceButton.Location = new System.Drawing.Point(177, 351);
+            this.nwInvoiceButton.Location = new System.Drawing.Point(259, 351);
             this.nwInvoiceButton.Name = "nwInvoiceButton";
             this.nwInvoiceButton.Size = new System.Drawing.Size(75, 75);
             this.nwInvoiceButton.TabIndex = 36;
@@ -418,7 +420,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(178, 412);
+            this.label21.Location = new System.Drawing.Point(260, 412);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(64, 13);
             this.label21.TabIndex = 37;
@@ -427,7 +429,7 @@
             // toolineoErrorFilesButton
             // 
             this.toolineoErrorFilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolineoErrorFilesButton.Location = new System.Drawing.Point(258, 351);
+            this.toolineoErrorFilesButton.Location = new System.Drawing.Point(340, 351);
             this.toolineoErrorFilesButton.Name = "toolineoErrorFilesButton";
             this.toolineoErrorFilesButton.Size = new System.Drawing.Size(75, 75);
             this.toolineoErrorFilesButton.TabIndex = 38;
@@ -438,17 +440,39 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(259, 412);
+            this.label22.Location = new System.Drawing.Point(341, 412);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(48, 13);
             this.label22.TabIndex = 39;
             this.label22.Text = "Toolineo";
             // 
+            // mercateoErrorFilesButton2
+            // 
+            this.mercateoErrorFilesButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mercateoErrorFilesButton2.Location = new System.Drawing.Point(97, 351);
+            this.mercateoErrorFilesButton2.Name = "mercateoErrorFilesButton2";
+            this.mercateoErrorFilesButton2.Size = new System.Drawing.Size(75, 75);
+            this.mercateoErrorFilesButton2.TabIndex = 40;
+            this.mercateoErrorFilesButton2.Text = " ";
+            this.mercateoErrorFilesButton2.UseVisualStyleBackColor = true;
+            this.mercateoErrorFilesButton2.Click += new System.EventHandler(this.mercateoErrorFilesButton2_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(98, 412);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(66, 13);
+            this.label23.TabIndex = 41;
+            this.label23.Text = "Mercateo IN";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 622);
+            this.ClientSize = new System.Drawing.Size(431, 622);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.mercateoErrorFilesButton2);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.toolineoErrorFilesButton);
             this.Controls.Add(this.label21);
@@ -535,6 +559,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button toolineoErrorFilesButton;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button mercateoErrorFilesButton2;
+        private System.Windows.Forms.Label label23;
     }
 }
 

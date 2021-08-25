@@ -89,6 +89,9 @@ namespace SystemHealth
                     CheckForErrorFiles(mercateoErrorFilesButton, "W:\\Mercateo\\ORDERS\\ERROR", "*.xml", "Es gibt ERROR Files bei Mercateo.");
                     updateProgressBar.PerformStep();
 
+                    CheckForErrorFiles(mercateoErrorFilesButton2, "W:\\Mercateo\\ORDERS\\INHOUSE\\ERROR", "*.edi", "Es gibt ERROR Files bei Mercateo.");
+                    updateProgressBar.PerformStep();
+
                     CheckForErrorFiles(toolineoErrorFilesButton, "W:\\Toolineo\\ORDERS\\ERROR", "*.xml", "Es gibt ERROR Files bei Toolineo.");
                     updateProgressBar.PerformStep();
 
@@ -419,6 +422,11 @@ namespace SystemHealth
             System.Diagnostics.Process.Start("W:\\Mercateo\\ORDERS\\ERROR");
         }
 
+        private void mercateoErrorFilesButton2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("W:\\Mercateo\\ORDERS\\INHOUSE\\ERROR");
+        }
+
         private void picardErrorFilesButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("W:\\Picard\\DESADV\\ERROR");
@@ -503,6 +511,6 @@ namespace SystemHealth
 
         }
 
-
+        
     }
 }
